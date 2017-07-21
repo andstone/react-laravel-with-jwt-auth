@@ -28,15 +28,15 @@ const html = task('html', () => {
 });
 
 // Generate sitemap.xml
-const sitemap = task('sitemap', () => {
-  const urls = require('../src/routes.json')
-    .filter(x => !x.path.includes(':'))
-    .map(x => ({ loc: x.path }));
-  const template = fs.readFileSync('./public/sitemap.ejs', 'utf8');
-  const render = ejs.compile(template, { filename: './public/sitemap.ejs' });
-  const output = render({ config, urls });
-  fs.writeFileSync('public/sitemap.xml', output, 'utf8');
-});
+// const sitemap = task('sitemap', () => {
+//   const urls = require('../src/routes.json')
+//     .filter(x => !x.path.includes(':'))
+//     .map(x => ({ loc: x.path }));
+//   const template = fs.readFileSync('./public/sitemap.ejs', 'utf8');
+//   const render = ejs.compile(template, { filename: './public/sitemap.ejs' });
+//   const output = render({ config, urls });
+//   fs.writeFileSync('public/sitemap.xml', output, 'utf8');
+// });
 
 // Bundle JavaScript, CSS and image files with Webpack
 const bundle = task('bundle', () => {
@@ -62,5 +62,5 @@ module.exports = task('build', () => {
   return Promise.resolve()
     .then(bundle)
     .then(html)
-    .then(sitemap);
+    // .then(sitemap);
 });
