@@ -22,6 +22,9 @@ Route::group(['prefix'=> 'auth'],function(){
     Route::post('/login/{social}/callback','Auth\LoginController@handleProviderCallback')->where('social','twitter|facebook|linkedin|google|github|bitbucket');
 });
 
+Route::post('password/email', 'Auth\ForgotPasswordController@getResetToken');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+
 Route::middleware(['jwt_auth'])->group(function(){
    Route::get('/hello',function(){
        return "Cool dude";
